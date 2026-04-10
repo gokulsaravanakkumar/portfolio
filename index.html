@@ -3,113 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gokul@Terminal:~</title>
+    <title>Gokul_Saravanakkumar_R | OS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500&display=swap');
         
         body {
-            background-color: #0a0a0a;
-            color: #00ff41; /* Classic Matrix Green */
-            font-family: 'Fira Code', monospace;
-            overflow-x: hidden;
+            background-color: #050505;
+            color: #00ff9d; /* Cyan-Green hacker tint */
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
         }
 
-        /* Scanline effect */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
+        .cursor { display: inline-block; width: 8px; height: 18px; background: #00ff9d; animation: blink 1s infinite; vertical-align: middle; }
+        @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+        .line { margin-bottom: 4px; opacity: 0; animation: fadeIn 0.3s forwards; }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        .command-text { color: #ffffff; }
+        .success { color: #50fa7b; }
+        .highlight { color: #8be9fd; font-weight: bold; }
+        
+        /* Container styling to match shankar.vip */
+        .terminal-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            border-left: 1px solid #1a1a1a;
         }
 
-        .terminal-window {
-            background: rgba(0, 0, 0, 0.85);
-            border: 1px solid #00ff41;
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-        }
-
-        .typing {
-            overflow: hidden;
-            border-right: .15em solid #00ff41;
-            white-space: nowrap;
-            letter-spacing: .15em;
-            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-        }
-
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #00ff41; } }
-
-        .glitch:hover {
-            text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9;
-        }
+        .nav-link:hover { text-decoration: underline; cursor: pointer; color: #fff; }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body>
 
-    <div class="max-w-4xl mx-auto">
-        <div class="terminal-window rounded-t-lg p-3 flex gap-2 border-b-0">
-            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-            <span class="text-xs text-gray-500 ml-2">guest@gokul-portfolio:~</span>
+    <div class="terminal-container">
+        <div id="boot-sequence">
+            <p class="line" style="animation-delay: 0.2s;">[  OK  ] Started System Boot Sequence...</p>
+            <p class="line" style="animation-delay: 0.4s;">[  OK  ] Initializing Gokul_OS v1.0.26</p>
+            <p class="line" style="animation-delay: 0.6s;">[  OK  ] Connecting to Mepco_Schlenk_Network...</p>
+            <p class="line" style="animation-delay: 0.8s;">[  OK  ] Loading Profile: <span class="highlight">Gokul Saravanakkumar R</span></p>
+            <p class="line" style="animation-delay: 1.2s;" class="success">LOGIN SUCCESSFUL. WELCOME GUEST.</p>
         </div>
 
-        <div class="terminal-window p-6 md:p-10 rounded-b-lg mb-10 min-h-[80vh]">
-            
-            <section class="mb-12">
-                <p class="text-sm opacity-70 mb-2">/usr/bin/whoami</p>
-                <h1 class="text-3xl md:text-5xl font-bold mb-4 glitch">GOKUL SARAVANAKKUMAR R</h1>
-                <p class="text-lg text-green-200">
-                    > PRE-FINAL YEAR IT STUDENT [cite: 5]<br>
-                    > MEPCO SCHLENK ENGINEERING COLLEGE [cite: 8]<br>
-                    > CURRENT_CGPA: 7.84 [cite: 11]
-                </p>
+        <hr class="border-gray-800 my-6">
+
+        <div id="main-content">
+            <section class="mb-10">
+                <h1 class="text-3xl font-bold text-white mb-2">GOKUL SARAVANAKKUMAR R</h1>
+                <p class="text-sm opacity-60">Pre-final Year IT Student @ Mepco Schlenk Engineering College [cite: 5, 8]</p>
+                <div class="flex gap-4 mt-2 text-xs">
+                    <span class="highlight">CGPA: 7.84</span> 
+                    <span>//</span>
+                    <a href="mailto:gokulsaravanakkumar@gmail.com" class="nav-link">EMAIL</a>
+                    <a href="https://linkedin.com/in/gokul-saravanakkumar-r-6a6964291" class="nav-link">LINKEDIN</a>
+                </div>
             </section>
 
-            <section class="mb-12">
-                <p class="text-sm opacity-70 mb-4">ls ./projects</p>
-                <div class="grid grid-cols-1 gap-6">
-                    <div class="border border-green-900 p-4 hover:bg-green-950/30 transition">
-                        <h3 class="font-bold underline">Malware Propagation Prediction [cite: 22]</h3>
-                        <p class="text-sm text-green-300 mt-2">Developed predictive framework for modeling malware in double-layer networks[cite: 24].</p>
-                        <span class="text-[10px] bg-green-900 px-2 py-1 mt-3 inline-block">CYBER_SECURITY</span>
+            <section class="mb-8">
+                <p class="mb-2"><span class="success">guest@gokul:~$</span> <span class="command-text">cat internship.log</span></p>
+                <div class="pl-4 border-l border-green-900 ml-2">
+                    <p class="font-bold">Infosys Springboard Virtual Internship 6.0 </p>
+                    <p class="text-xs text-gray-400">Feb - Apr 2026 [cite: 18]</p>
+                    <p class="text-sm mt-1">Built <span class="highlight">QuickServe</span> — localized services app using React.js and Java[cite: 19]. Gained experience in Git, Agile, and clean code[cite: 20].</p>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <p class="mb-2"><span class="success">guest@gokul:~$</span> <span class="command-text">ls ./university_projects</span></p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ml-4">
+                    <div class="text-sm">
+                        <p class="highlight">> Malware_Prediction.sh [cite: 22]</p>
+                        <p class="opacity-70">Modeling malware propagation in interconnected systems[cite: 24].</p>
                     </div>
-
-                    <div class="border border-green-900 p-4 hover:bg-green-950/30 transition">
-                        <h3 class="font-bold underline">QuickServe (Infosys) [cite: 19]</h3>
-                        <p class="text-sm text-green-300 mt-2">Full-stack localized services web app using React.js & Java[cite: 19].</p>
-                        <span class="text-[10px] bg-green-900 px-2 py-1 mt-3 inline-block">FULL_STACK</span>
+                    <div class="text-sm">
+                        <p class="highlight">> Store_Smart_Manager.exe [cite: 26]</p>
+                        <p class="opacity-70">Inventory management for RVM Fruits & Vegetables[cite: 28].</p>
+                    </div>
+                    <div class="text-sm">
+                        <p class="highlight">> Space_Invaders.py [cite: 33]</p>
+                        <p class="opacity-70">Python game showcased at MEPEXPO'24[cite: 35, 36].</p>
                     </div>
                 </div>
             </section>
 
-            <section class="mb-12">
-                <p class="text-sm opacity-70 mb-2">./show_skills.sh</p>
-                <div class="text-sm grid grid-cols-2 md:grid-cols-4 gap-2">
-                    <div>[✓] Java </div>
-                    <div>[✓] Python </div>
-                    <div>[✓] React.js [cite: 46]</div>
-                    <div>[✓] C++ </div>
-                    <div>[✓] MySQL [cite: 48]</div>
-                    <div>[✓] Git [cite: 49]</div>
+            <section class="mb-8">
+                <p class="mb-2"><span class="success">guest@gokul:~$</span> <span class="command-text">sudo apt-get install skills</span></p>
+                <div class="flex flex-wrap gap-x-6 gap-y-2 ml-4 text-sm">
+                    <span>[+] JAVA [cite: 45]</span>
+                    <span>[+] PYTHON [cite: 45]</span>
+                    <span>[+] REACT.JS </span>
+                    <span>[+] CYBER_SECURITY [cite: 50]</span>
+                    <span>[+] MACHINE_LEARNING [cite: 50]</span>
                 </div>
             </section>
 
-            <section class="border-t border-green-900 pt-6">
-                <p class="text-sm opacity-70 mb-2">ping -c 1 social_media</p>
-                <div class="flex gap-6 text-sm">
-                    <a href="mailto:gokulsaravanakkumar@gmail.com" class="hover:underline">EMAIL</a>
-                    <a href="https://www.linkedin.com/in/gokul-saravanakkumar-r-6a6964291" class="hover:underline">LINKEDIN</a>
-                </div>
-                <div class="mt-10 typing text-xs text-green-700">
-                    System ready. Waiting for input...
-                </div>
-            </section>
+            <div class="mt-20">
+                <p><span class="success">guest@gokul:~$</span> <span class="cursor"></span></p>
+            </div>
         </div>
     </div>
 
