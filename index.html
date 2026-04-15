@@ -5,210 +5,144 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gokul Saravanakkumar R | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #020617; 
-            color: #f8fafc; 
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-        /* Animated Gradient Background */
-        .bg-glow {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -20%, #1e40af22, transparent),
-                        radial-gradient(circle at 0% 100%, #0f172a, transparent);
-            z-index: -1;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: #38bdf8;
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-        }
-        .text-gradient {
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .skill-badge {
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            transition: 0.3s;
-        }
-        .skill-badge:hover {
-            background: #38bdf8;
-            color: #020617;
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; scroll-behavior: smooth; }
+        .section-dark { background-color: #0f172a; color: #f8fafc; }
+        .card { background: white; border: 1px solid #e2e8f0; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1); }
+        .badge { background: #e2e8f0; color: #475569; padding: 2px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
     </style>
 </head>
 <body>
-    <div class="bg-glow"></div>
 
-    <header class="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12 z-10">
-            <div data-aos="fade-right" class="text-center md:text-left flex-1">
-                <span class="px-4 py-1 rounded-full border border-sky-500/30 text-sky-400 text-xs font-bold uppercase tracking-widest mb-6 inline-block">Available for Roles</span>
-                <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight">
-                    Gokul <br><span class="text-gradient">Saravanakkumar</span>
-                </h1> 
-                <p class="text-xl text-gray-400 mb-8 max-w-lg">Software Developer specializing in <span class="text-white">Full-Stack Development</span> & <span class="text-white">Cybersecurity</span>.</p>
-                
-                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                    <a href="https://www.linkedin.com/in/gokul-saravanakkumar-r-6a6964291" target="_blank" class="px-8 py-3 bg-sky-500 hover:bg-sky-400 text-slate-900 font-bold rounded-full transition-all hover:shadow-[0_0_20px_rgba(56,189,248,0.4)]">
-                        View LinkedIn
-                    </a>
-                    <a href="#projects" class="px-8 py-3 glass-card rounded-full font-bold hover:border-white">View Work</a>
-                </div>
+    <header class="py-16 px-6 section-dark">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <h1 class="text-4xl md:text-5xl font-bold mb-2">Gokul Saravanakkumar R</h1> 
+                <p class="text-sky-400 text-lg font-medium mb-4">Software Developer</p>
+                <p class="max-w-xl text-gray-400 text-sm leading-relaxed">
+                    Motivated Pre-final Year IT student with hands-on experience in LLM. Eager to contribute effectively in software development, cybersecurity and IoT domains.
+                </p>
             </div>
-
-            <div data-aos="fade-left" class="glass-card p-8 rounded-3xl w-full md:w-80 space-y-4">
-                <div class="space-y-1">
-                    <p class="text-gray-500 text-xs uppercase font-bold">Location</p>
-                    <p class="text-sm">📍 Paramakudi, TN-623707</p>
-                </div>
-                <div class="space-y-1">
-                    <p class="text-gray-500 text-xs uppercase font-bold">Contact</p>
-                    <p class="text-sm">📞 +91 63690 91852</p>
-                    <p class="text-sm">✉️ <a href="mailto:gokulsaravanakkumar@gmail.com" class="text-sky-400">Email Me</a></p>
-                </div>
-                <div class="pt-4 border-t border-white/10">
-                    <p class="text-xs text-gray-500 italic">"Motivated IT student with hands-on experience in LLM and software development."</p>
+            <div class="glass-card bg-white/5 p-6 rounded-xl border border-white/10 text-sm space-y-2">
+                <p>📍 Paramakudi-623707 </p>
+                <p>📞 +916369091852 </p>
+                <p>✉️ <a href="mailto:gokulsaravanakkumar@gmail.com" class="text-sky-400 hover:underline">gokulsaravanakkumar@gmail.com</a> </p>
+                <div class="pt-2">
+                    <a href="https://www.linkedin.com/in/gokul-saravanakkumar-r-6a6964291" class="bg-sky-500 text-white px-4 py-2 rounded font-bold block text-center">LinkedIn Profile</a> 
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-6 space-y-32 pb-24">
-
-        <section data-aos="fade-up">
-            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
-                <span class="w-12 h-1 bg-sky-500"></span> Technical Arsenal
-            </h2>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                <div class="skill-badge p-4 rounded-xl text-center font-semibold">Java</div>
-                <div class="skill-badge p-4 rounded-xl text-center font-semibold">Python</div>
-                <div class="skill-badge p-4 rounded-xl text-center font-semibold">React.js</div>
-                <div class="skill-badge p-4 rounded-xl text-center font-semibold">Node.js</div>
-                <div class="skill-badge p-4 rounded-xl text-center font-semibold">MongoDB</div>
-                <div class="skill-badge p-4 rounded-xl text-center font-semibold">C / C++</div>
-                <div class="skill-badge p-4 rounded-xl text-center font-semibold">MySQL</div>
-                <div class="skill-badge p-4 rounded-xl text-center font-semibold">Git</div>
-                <div class="skill-badge p-4 rounded-xl text-center font-semibold">Postman</div>
-                <div class="skill-badge p-4 rounded-xl text-center font-semibold">CyberSec</div>
+    <section class="py-16 px-6 max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
+        <div class="md:col-span-2 space-y-6">
+            <h2 class="text-2xl font-bold border-b-2 border-sky-500 pb-2 inline-block">Education</h2>
+            <div class="card p-6 rounded-xl">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-lg">Mepco Schlenk Engineering College, Sivakasi</h3> 
+                    <span class="text-sm font-semibold text-sky-600">2023 - 2027</span> 
+                </div>
+                <p class="text-gray-600">B.Tech Information Technology</p> 
+                <p class="font-bold mt-2">CGPA: 7.84/10 (upto 5th sem)</p> 
             </div>
-        </section>
+            <div class="card p-6 rounded-xl">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-lg">Ayira Vaisya Higher Secondary School,Paramakudi</h3> 
+                    <span class="text-sm font-semibold text-sky-600">2022 - 2023</span> 
+                </div>
+                <p class="text-gray-600">HSC (Class XII)</p> 
+                <p class="font-bold mt-2">Score: 87.17%</p> 
+            </div>
+        </div>
 
-        <section data-aos="fade-up">
-            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
-                <span class="w-12 h-1 bg-sky-500"></span> Experience
-            </h2>
-            <div class="glass-card p-10 rounded-3xl border-l-4 border-sky-500 relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-6 opacity-10">
-                    <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+        <div class="space-y-8">
+            <div>
+                <h2 class="text-xl font-bold mb-4">Technical Skills</h2> 
+                <div class="flex flex-wrap gap-2">
+                    <span class="badge">Java</span>  <span class="badge">Python</span>
+                    <span class="badge">C/C++</span>  <span class="badge">React.js</span> 
+                    <span class="badge">Node.js</span>  <span class="badge">MySQL</span> 
+                    <span class="badge">MongoDB</span>  <span class="badge">Git/GitHub</span> 
+                    <span class="badge">Postman</span>  <span class="badge">Cyber Security</span>
                 </div>
-                <div class="flex flex-col md:flex-row justify-between mb-6">
+            </div>
+            <div>
+                <h2 class="text-xl font-bold mb-4">Soft Skills</h2>
+                <ul class="text-sm space-y-1 text-gray-600">
+                    <li>• Problem Solving</li> 
+                    <li>• Teamwork & Adaptability</li> 
+                    <li>• Time Management</li>
+                    <li>• Critical Thinking</li> 
+                    <li>• Self-Motivation</li> 
+                    <li>• Active Listening</li> 
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 px-6 bg-gray-100">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl font-bold mb-8">Professional Experience</h2>
+            <div class="card p-8 rounded-xl border-l-8 border-sky-500">
+                <div class="flex justify-between items-start mb-4">
                     <div>
-                        <h3 class="text-2xl font-bold text-white">Infosys Springboard Virtual Internship</h3>
-                        <p class="text-sky-400 font-semibold mt-1">Full Stack Developer Intern</p>
+                        <h3 class="text-xl font-bold">Infosys Springboard Virtual Internship 6.0</h3> 
+                        <p class="text-sky-600 font-medium">Full Stack Developer Intern</p>
                     </div>
-                    <span class="text-gray-400 font-mono">Feb 2026 — Apr 2026</span>
+                    <span class="text-sm font-bold bg-white px-3 py-1 rounded-full border">Feb - Apr 2026</span> 
                 </div>
-                <p class="text-gray-300 leading-relaxed max-w-3xl">
-                    Spearheaded the development of <span class="text-white font-bold">QuickServe</span>, a localized services ecosystem. Integrated React.js with Java Maven backends, achieving seamless data flow and a 20% improvement in load times through optimized clean-coding practices.
+                <p class="text-gray-700 leading-relaxed">
+                    Developed <strong>QuickServe</strong>, a localized services web application using React.js for frontend and Java with Maven for backend services. Gained hands-on experience in debugging, version control using Git, and clean coding in an Agile environment.
                 </p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="projects" data-aos="fade-up">
-            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
-                <span class="w-12 h-1 bg-sky-500"></span> Key Projects
-            </h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="glass-card p-8 rounded-3xl group">
-                    <p class="text-sky-500 font-mono text-sm mb-2">Dec 2025</p>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-sky-400 transition-colors">Malware Propagation Prediction</h3>
-                    <p class="text-gray-400 text-sm mb-6">Predictive framework for double-layer computer networks using mathematical modeling to forecast attack vectors.</p>
-                    <div class="flex gap-2">
-                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Security</span>
-                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Data Modeling</span>
-                    </div>
-                </div>
-                <div class="glass-card p-8 rounded-3xl group">
-                    <p class="text-sky-500 font-mono text-sm mb-2">May 2025</p>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-sky-400 transition-colors">Store Smart Manager</h3>
-                    <p class="text-gray-400 text-sm mb-6">Inventory and order management system for RVM Fruits, streamlining stock tracking and operations.</p>
-                    <div class="flex gap-2">
-                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Management</span>
-                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Database</span>
-                    </div>
-                </div>
-                <div class="glass-card p-8 rounded-3xl group">
-                    <p class="text-sky-500 font-mono text-sm mb-2">Dec 2024</p>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-sky-400 transition-colors">Performance Booster</h3>
-                    <p class="text-gray-400 text-sm mb-6">Java-based automation tool for disk space optimization by identifying redundant system files.</p>
-                    <div class="flex gap-2">
-                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Java Core</span>
-                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Utility</span>
-                    </div>
-                </div>
-                <div class="glass-card p-8 rounded-3xl group">
-                    <p class="text-sky-500 font-mono text-sm mb-2">May 2024</p>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-sky-400 transition-colors">Space Invaders</h3>
-                    <p class="text-gray-400 text-sm mb-6">Python-based arcade game exhibited at MEPEXPO'24. Features custom physics and sprite management.</p>
-                    <div class="flex gap-2">
-                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Python</span>
-                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Pygame</span>
-                    </div>
-                </div>
+    <section class="py-16 px-6 max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold mb-8">University Projects</h2> 
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="card p-6 rounded-xl">
+                <p class="text-xs font-bold text-sky-500 uppercase mb-1">Dec 2025</p> 
+                <h3 class="text-xl font-bold mb-3">Malware Propagation Prediction</h3> 
+                <p class="text-sm text-gray-600 mb-4">Developed a predictive framework for modeling malware propagation in double-layer computer networks, enabling accurate forecasting and optimized defense strategies.</p>
             </div>
-        </section>
-
-        <section class="grid md:grid-cols-2 gap-12" data-aos="fade-up">
-            <div>
-                <h2 class="text-3xl font-bold mb-8">Education</h2>
-                <div class="space-y-6">
-                    <div class="border-l-2 border-white/10 pl-6">
-                        <p class="text-sky-400 font-bold">2023 - 2027</p>
-                        <h4 class="text-lg font-bold">Mepco Schlenk Engineering College</h4>
-                        <p class="text-gray-400">B.Tech Information Technology</p>
-                        <p class="text-white mt-1 font-mono">CGPA: 7.84</p>
-                    </div>
-                </div>
+            <div class="card p-6 rounded-xl">
+                <p class="text-xs font-bold text-sky-500 uppercase mb-1">May 2025</p> 
+                <h3 class="text-xl font-bold mb-3">Store Smart Manager</h3> 
+                <p class="text-sm text-gray-600 mb-4">Management system for RVM Fruits and Vegetables shop to monitor orders, maintain stock records, and improve operational efficiency.</p>
             </div>
-            <div>
-                <h2 class="text-3xl font-bold mb-8">Certifications</h2>
-                <div class="flex flex-wrap gap-3">
-                    <span class="glass-card px-4 py-2 rounded-lg text-sm">Practical Cyber Security (NPTEL)</span>
-                    <span class="glass-card px-4 py-2 rounded-lg text-sm">Internet of Things (NPTEL)</span>
-                    <span class="glass-card px-4 py-2 rounded-lg text-sm">IT Foundation - Java (Infosys)</span>
-                    <span class="glass-card px-4 py-2 rounded-lg text-sm">R Software (NPTEL)</span>
-                </div>
+            <div class="card p-6 rounded-xl">
+                <p class="text-xs font-bold text-sky-500 uppercase mb-1">Dec 2024</p> 
+                <h3 class="text-xl font-bold mb-3">Performance Booster</h3> 
+                <p class="text-sm text-gray-600 mb-4">Java application automating the identification and removal of unused files to help users manage disk space effectively.</p>
             </div>
-        </section>
+            <div class="card p-6 rounded-xl">
+                <p class="text-xs font-bold text-sky-500 uppercase mb-1">May 2024</p> 
+                <h3 class="text-xl font-bold mb-3">Space Invaders</h3> 
+                <p class="text-sm text-gray-600 mb-4">Developed a python based fighting game and exhibited at MEPEXPO'24.</p>
+            </div>
+        </div>
+    </section>
 
-    </main>
+    <section class="py-16 px-6 section-dark">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl font-bold mb-8">Professional Certifications</h2> 
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white/10 p-4 rounded border border-white/20">• Practical Cyber Security (NPTEL)</div> 
+                <div class="bg-white/10 p-4 rounded border border-white/20">• Introduction to Internet of Things (NPTEL)</div>
+                <div class="bg-white/10 p-4 rounded border border-white/20">• Introduction to R Software (NPTEL)</div>
+                <div class="bg-white/10 p-4 rounded border border-white/20">• IT Foundation Skills - Java (Infosys)</div> 
+                <div class="bg-white/10 p-4 rounded border border-white/20">• Diploma in Computer Application (DCA)</div> 
+                <div class="bg-white/10 p-4 rounded border border-white/20">• Diploma in MS-Office (DMO)</div> 
+            </div>
+        </div>
+    </section>
 
-    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-sm">
-        <p>© 2026 Gokul Saravanakkumar R. Built with precision.</p>
+    <footer class="py-10 text-center text-gray-500 text-xs">
+        &copy; 2026 Gokul Saravanakkumar R. All Rights Reserved.
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-            easing: 'ease-out-quad'
-        });
-    </script>
 </body>
 </html>
