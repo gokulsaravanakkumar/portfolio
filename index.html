@@ -4,1157 +4,211 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gokul Saravanakkumar R | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #050a0e;
-            --surface: #0d1b26;
-            --surface2: #0f2235;
-            --accent: #00c2ff;
-            --accent2: #00ffa3;
-            --accent3: #ff6b6b;
-            --text: #e8f4f8;
-            --muted: #5e8299;
-            --border: rgba(0,194,255,0.15);
-            --glow: 0 0 40px rgba(0,194,255,0.15);
-        }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #020617; 
+            color: #f8fafc; 
+            scroll-behavior: smooth;
             overflow-x: hidden;
-            cursor: none;
         }
-
-        /* CUSTOM CURSOR */
-        #cursor {
+        /* Animated Gradient Background */
+        .bg-glow {
             position: fixed;
-            width: 12px; height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-            mix-blend-mode: screen;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% -20%, #1e40af22, transparent),
+                        radial-gradient(circle at 0% 100%, #0f172a, transparent);
+            z-index: -1;
         }
-        #cursor-ring {
-            position: fixed;
-            width: 40px; height: 40px;
-            border: 1px solid rgba(0,194,255,0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transition: transform 0.15s ease, width 0.3s, height 0.3s, opacity 0.3s;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        /* CANVAS BG */
-        #bg-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-            opacity: 0.4;
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: #38bdf8;
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
         }
-
-        /* NAV */
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(5,10,14,0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 1.4rem;
-            color: var(--accent);
-            letter-spacing: -0.02em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 36px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--muted);
-            text-decoration: none;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px; left: 0;
-            width: 0; height: 1px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover { color: var(--accent); }
-        .nav-links a:hover::after { width: 100%; }
-
-        /* MAIN WRAPPER */
-        main { position: relative; z-index: 1; }
-
-        /* HERO */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 60px 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .hero-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--accent2);
-            margin-bottom: 24px;
-            opacity: 0;
-            animation: fadeUp 0.8s 0.2s forwards;
-        }
-
-        .hero-tag::before {
-            content: '';
-            width: 24px; height: 1px;
-            background: var(--accent2);
-        }
-
-        .hero-name {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(3rem, 6vw, 5.5rem);
-            font-weight: 800;
-            line-height: 0.95;
-            letter-spacing: -0.03em;
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: fadeUp 0.8s 0.4s forwards;
-        }
-
-        .hero-name span {
-            display: block;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
+        .text-gradient {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
-
-        .hero-role {
-            font-size: 1.1rem;
-            font-weight: 300;
-            color: var(--muted);
-            margin-bottom: 32px;
-            opacity: 0;
-            animation: fadeUp 0.8s 0.6s forwards;
-            letter-spacing: 0.02em;
-        }
-
-        .hero-desc {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: #8eb0c7;
-            max-width: 520px;
-            margin-bottom: 48px;
-            opacity: 0;
-            animation: fadeUp 0.8s 0.8s forwards;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeUp 0.8s 1s forwards;
-        }
-
-        .btn-primary {
-            padding: 14px 32px;
-            background: var(--accent);
-            color: var(--bg);
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.3s;
-            border: none;
-            cursor: none;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent2);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,255,163,0.3);
-        }
-
-        .btn-outline {
-            padding: 14px 32px;
-            background: transparent;
-            color: var(--accent);
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            text-decoration: none;
-            border-radius: 4px;
-            border: 1px solid var(--accent);
-            transition: all 0.3s;
-            cursor: none;
-        }
-
-        .btn-outline:hover {
-            background: rgba(0,194,255,0.1);
-            transform: translateY(-2px);
-        }
-
-        /* HERO CARD */
-        .hero-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 36px;
-            min-width: 280px;
-            box-shadow: var(--glow);
-            opacity: 0;
-            animation: fadeLeft 0.8s 1.1s forwards;
-        }
-
-        .hero-card p {
-            font-size: 0.88rem;
-            color: #8eb0c7;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .hero-card .icon {
-            width: 28px; height: 28px;
-            background: rgba(0,194,255,0.1);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-            flex-shrink: 0;
-        }
-
-        .hero-card a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .hero-card a:hover { text-decoration: underline; }
-
-        .stat-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 24px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border);
-        }
-
-        .stat-box {
-            background: rgba(0,194,255,0.05);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 14px;
-            text-align: center;
-        }
-
-        .stat-box .val {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--accent);
-            display: block;
-        }
-
-        .stat-box .lbl {
-            font-size: 0.68rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* SECTIONS COMMON */
-        section {
-            padding: 100px 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-full {
-            max-width: none;
-            padding: 100px 60px;
-        }
-
-        .section-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            font-size: 0.72rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-label::before {
-            content: '';
-            width: 20px; height: 1px;
-            background: var(--accent);
-        }
-
-        .section-title {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 60px;
-            line-height: 1.1;
-        }
-
-        .section-title em {
-            font-style: normal;
-            color: var(--accent);
-        }
-
-        /* SKILLS */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
-        }
-
-        .skill-pill {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 16px 20px;
-            text-align: center;
-            font-family: 'Syne', sans-serif;
-            font-weight: 600;
-            font-size: 0.88rem;
-            color: var(--text);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-pill::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(0,194,255,0.1), rgba(0,255,163,0.05));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .skill-pill:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,194,255,0.15);
-            color: var(--accent);
-        }
-
-        .skill-pill:hover::before { opacity: 1; }
-
-        /* EXPERIENCE */
-        .exp-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 48px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s;
-        }
-
-        .exp-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 4px; height: 100%;
-            background: linear-gradient(to bottom, var(--accent), var(--accent2));
-        }
-
-        .exp-card:hover {
-            border-color: rgba(0,194,255,0.4);
-            box-shadow: var(--glow);
-            transform: translateX(4px);
-        }
-
-        .exp-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .exp-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-        }
-
-        .exp-badge {
-            background: rgba(0,194,255,0.1);
-            border: 1px solid rgba(0,194,255,0.3);
-            color: var(--accent);
-            padding: 6px 16px;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        .exp-role {
-            color: var(--accent2);
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-
-        .exp-desc {
-            color: #8eb0c7;
-            line-height: 1.8;
-            font-size: 0.95rem;
-        }
-
-        .exp-desc strong { color: var(--text); }
-
-        /* PROJECTS */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .project-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: -60px; right: -60px;
-            width: 120px; height: 120px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,194,255,0.08), transparent 70%);
-            transition: all 0.5s;
-        }
-
-        .project-card:hover {
-            border-color: rgba(0,194,255,0.4);
-            transform: translateY(-6px);
-            box-shadow: 0 20px 60px rgba(0,194,255,0.1);
-        }
-
-        .project-card:hover::after {
-            top: -20px; right: -20px;
-            width: 200px; height: 200px;
-        }
-
-        .project-date {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 12px;
-        }
-
-        .project-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 800;
-            margin-bottom: 14px;
-            line-height: 1.2;
-        }
-
-        .project-desc {
-            font-size: 0.88rem;
-            line-height: 1.7;
-            color: #8eb0c7;
-            flex: 1;
-        }
-
-        .project-tag {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 4px 12px;
-            border-radius: 100px;
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            border: 1px solid rgba(0,255,163,0.3);
-            color: var(--accent2);
-        }
-
-        /* CERTS */
-        .certs-section {
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .certs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
-        }
-
-        .cert-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 20px 24px;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            transition: all 0.3s;
-        }
-
-        .cert-item:hover {
-            border-color: rgba(0,194,255,0.4);
-            background: rgba(0,194,255,0.04);
-            transform: translateX(4px);
-        }
-
-        .cert-icon {
-            width: 36px; height: 36px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, rgba(0,194,255,0.2), rgba(0,255,163,0.1));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .cert-name {
-            font-size: 0.88rem;
-            font-weight: 500;
-            color: var(--text);
-            line-height: 1.4;
-        }
-
-        .cert-name span {
-            display: block;
-            font-size: 0.75rem;
-            color: var(--muted);
-            margin-top: 2px;
-            font-weight: 400;
-        }
-
-        /* EDUCATION */
-        .edu-timeline {
-            position: relative;
-            padding-left: 32px;
-        }
-
-        .edu-timeline::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 1px;
-            background: linear-gradient(to bottom, var(--accent), transparent);
-        }
-
-        .edu-item {
-            position: relative;
-            margin-bottom: 40px;
-            padding: 32px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            transition: all 0.3s;
-        }
-
-        .edu-item::before {
-            content: '';
-            position: absolute;
-            left: -38px; top: 32px;
-            width: 12px; height: 12px;
-            border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 12px var(--accent);
-        }
-
-        .edu-item:hover {
-            border-color: rgba(0,194,255,0.4);
-            box-shadow: var(--glow);
-        }
-
-        .edu-year {
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            margin-bottom: 8px;
-        }
-
-        .edu-school {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .edu-degree { color: var(--muted); font-size: 0.9rem; margin-bottom: 10px; }
-
-        .edu-score {
-            display: inline-block;
-            padding: 4px 14px;
-            background: rgba(0,255,163,0.1);
-            border: 1px solid rgba(0,255,163,0.3);
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--accent2);
-        }
-
-        /* SOFT SKILLS */
-        .soft-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-        }
-
-        .soft-item {
-            padding: 24px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            transition: all 0.3s;
-        }
-
-        .soft-item:hover {
-            border-color: rgba(0,194,255,0.4);
-            transform: translateY(-2px);
-        }
-
-        .soft-icon {
-            font-size: 1.4rem;
-            flex-shrink: 0;
-        }
-
-        .soft-name {
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        /* FOOTER */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: gap;
-            position: relative;
-            z-index: 1;
-        }
-
-        .footer-logo {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--accent);
-        }
-
-        .footer-copy {
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
-
-        /* SCROLL REVEAL */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ANIMATIONS */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeLeft {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* SEPARATOR */
-        .sep {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--border), transparent);
-            margin: 0;
-        }
-
-        /* SCROLLBAR */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            nav { padding: 16px 24px; }
-            .nav-links { display: none; }
-            #hero { padding: 100px 24px 60px; }
-            .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-            section { padding: 70px 24px; }
-            .section-full { padding: 70px 24px; }
-            footer { padding: 40px 24px; flex-direction: column; gap: 16px; text-align: center; }
+        .skill-badge {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            transition: 0.3s;
+        }
+        .skill-badge:hover {
+            background: #38bdf8;
+            color: #020617;
         }
     </style>
 </head>
 <body>
+    <div class="bg-glow"></div>
 
-<!-- CURSOR -->
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-
-<!-- BG CANVAS -->
-<canvas id="bg-canvas"></canvas>
-
-<!-- NAV -->
-<nav>
-    <div class="nav-logo">GS<span style="color:var(--text)">.</span></div>
-    <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#certs">Certs</a></li>
-        <li><a href="#education">Education</a></li>
-    </ul>
-</nav>
-
-<main>
-
-<!-- HERO -->
-<section id="about" style="padding:0; max-width:none;">
-    <div id="hero">
-        <div class="hero-inner">
-            <div>
-                <div class="hero-tag">Available for Internships</div>
-                <h1 class="hero-name">
-                    Gokul<br>
-                    <span>Saravanakkumar</span>
-                </h1>
-                <p class="hero-role">Software Developer &nbsp;·&nbsp; IT Student &nbsp;·&nbsp; Full Stack</p>
-                <p class="hero-desc">Motivated Pre-final Year IT student with hands-on experience in LLM and software development. Eager to contribute in software development, cybersecurity, and IoT domains.</p>
-                <div class="hero-btns">
-                    <a href="mailto:gokulsaravanakkumar@gmail.com" class="btn-primary">Get In Touch</a>
-                    <a href="https://www.linkedin.com/in/gokul-saravanakkumar-r-6a6964291" target="_blank" class="btn-outline">LinkedIn ↗</a>
+    <header class="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12 z-10">
+            <div data-aos="fade-right" class="text-center md:text-left flex-1">
+                <span class="px-4 py-1 rounded-full border border-sky-500/30 text-sky-400 text-xs font-bold uppercase tracking-widest mb-6 inline-block">Available for Roles</span>
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight">
+                    Gokul <br><span class="text-gradient">Saravanakkumar</span>
+                </h1> 
+                <p class="text-xl text-gray-400 mb-8 max-w-lg">Software Developer specializing in <span class="text-white">Full-Stack Development</span> & <span class="text-white">Cybersecurity</span>.</p>
+                
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                    <a href="https://www.linkedin.com/in/gokul-saravanakkumar-r-6a6964291" target="_blank" class="px-8 py-3 bg-sky-500 hover:bg-sky-400 text-slate-900 font-bold rounded-full transition-all hover:shadow-[0_0_20px_rgba(56,189,248,0.4)]">
+                        View LinkedIn
+                    </a>
+                    <a href="#projects" class="px-8 py-3 glass-card rounded-full font-bold hover:border-white">View Work</a>
                 </div>
             </div>
-            <div class="hero-card">
-                <p><span class="icon">📍</span> Paramakudi - 623707, TN</p>
-                <p><span class="icon">📞</span> +91 6369091852</p>
-                <p><span class="icon">✉️</span> <a href="mailto:gokulsaravanakkumar@gmail.com">gokulsaravanakkumar@gmail.com</a></p>
-                <div class="stat-row">
-                    <div class="stat-box">
-                        <span class="val">7.84</span>
-                        <span class="lbl">CGPA</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="val">4+</span>
-                        <span class="lbl">Projects</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="val">6+</span>
-                        <span class="lbl">Certs</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="val">2027</span>
-                        <span class="lbl">Batch</span>
-                    </div>
+
+            <div data-aos="fade-left" class="glass-card p-8 rounded-3xl w-full md:w-80 space-y-4">
+                <div class="space-y-1">
+                    <p class="text-gray-500 text-xs uppercase font-bold">Location</p>
+                    <p class="text-sm">📍 Paramakudi, TN-623707</p>
+                </div>
+                <div class="space-y-1">
+                    <p class="text-gray-500 text-xs uppercase font-bold">Contact</p>
+                    <p class="text-sm">📞 +91 63690 91852</p>
+                    <p class="text-sm">✉️ <a href="mailto:gokulsaravanakkumar@gmail.com" class="text-sky-400">Email Me</a></p>
+                </div>
+                <div class="pt-4 border-t border-white/10">
+                    <p class="text-xs text-gray-500 italic">"Motivated IT student with hands-on experience in LLM and software development."</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </header>
 
-<div class="sep"></div>
+    <main class="max-w-5xl mx-auto px-6 space-y-32 pb-24">
 
-<!-- SKILLS -->
-<section id="skills">
-    <div class="section-label">What I work with</div>
-    <h2 class="section-title">Technical <em>Skills</em></h2>
-    <div class="skills-grid reveal">
-        <div class="skill-pill">Java</div>
-        <div class="skill-pill">Python</div>
-        <div class="skill-pill">C / C++</div>
-        <div class="skill-pill">React.js</div>
-        <div class="skill-pill">Node.js</div>
-        <div class="skill-pill">MySQL</div>
-        <div class="skill-pill">MongoDB</div>
-        <div class="skill-pill">Git / GitHub</div>
-        <div class="skill-pill">Postman</div>
-        <div class="skill-pill">Cyber Security</div>
-    </div>
+        <section data-aos="fade-up">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+                <span class="w-12 h-1 bg-sky-500"></span> Technical Arsenal
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="skill-badge p-4 rounded-xl text-center font-semibold">Java</div>
+                <div class="skill-badge p-4 rounded-xl text-center font-semibold">Python</div>
+                <div class="skill-badge p-4 rounded-xl text-center font-semibold">React.js</div>
+                <div class="skill-badge p-4 rounded-xl text-center font-semibold">Node.js</div>
+                <div class="skill-badge p-4 rounded-xl text-center font-semibold">MongoDB</div>
+                <div class="skill-badge p-4 rounded-xl text-center font-semibold">C / C++</div>
+                <div class="skill-badge p-4 rounded-xl text-center font-semibold">MySQL</div>
+                <div class="skill-badge p-4 rounded-xl text-center font-semibold">Git</div>
+                <div class="skill-badge p-4 rounded-xl text-center font-semibold">Postman</div>
+                <div class="skill-badge p-4 rounded-xl text-center font-semibold">CyberSec</div>
+            </div>
+        </section>
 
-    <div style="margin-top: 60px;">
-        <div class="section-label">Interpersonal</div>
-        <h2 class="section-title" style="margin-bottom: 32px;">Soft <em>Skills</em></h2>
-        <div class="soft-grid reveal">
-            <div class="soft-item"><span class="soft-icon">🧩</span><span class="soft-name">Problem Solving</span></div>
-            <div class="soft-item"><span class="soft-icon">🤝</span><span class="soft-name">Teamwork & Adaptability</span></div>
-            <div class="soft-item"><span class="soft-icon">⏱️</span><span class="soft-name">Time Management</span></div>
-            <div class="soft-item"><span class="soft-icon">🧠</span><span class="soft-name">Critical Thinking</span></div>
-            <div class="soft-item"><span class="soft-icon">🔥</span><span class="soft-name">Self-Motivation</span></div>
-            <div class="soft-item"><span class="soft-icon">👂</span><span class="soft-name">Active Listening</span></div>
-        </div>
-    </div>
-</section>
+        <section data-aos="fade-up">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+                <span class="w-12 h-1 bg-sky-500"></span> Experience
+            </h2>
+            <div class="glass-card p-10 rounded-3xl border-l-4 border-sky-500 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-6 opacity-10">
+                    <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+                </div>
+                <div class="flex flex-col md:flex-row justify-between mb-6">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white">Infosys Springboard Virtual Internship</h3>
+                        <p class="text-sky-400 font-semibold mt-1">Full Stack Developer Intern</p>
+                    </div>
+                    <span class="text-gray-400 font-mono">Feb 2026 — Apr 2026</span>
+                </div>
+                <p class="text-gray-300 leading-relaxed max-w-3xl">
+                    Spearheaded the development of <span class="text-white font-bold">QuickServe</span>, a localized services ecosystem. Integrated React.js with Java Maven backends, achieving seamless data flow and a 20% improvement in load times through optimized clean-coding practices.
+                </p>
+            </div>
+        </section>
 
-<div class="sep"></div>
+        <section id="projects" data-aos="fade-up">
+            <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+                <span class="w-12 h-1 bg-sky-500"></span> Key Projects
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="glass-card p-8 rounded-3xl group">
+                    <p class="text-sky-500 font-mono text-sm mb-2">Dec 2025</p>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-sky-400 transition-colors">Malware Propagation Prediction</h3>
+                    <p class="text-gray-400 text-sm mb-6">Predictive framework for double-layer computer networks using mathematical modeling to forecast attack vectors.</p>
+                    <div class="flex gap-2">
+                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Security</span>
+                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Data Modeling</span>
+                    </div>
+                </div>
+                <div class="glass-card p-8 rounded-3xl group">
+                    <p class="text-sky-500 font-mono text-sm mb-2">May 2025</p>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-sky-400 transition-colors">Store Smart Manager</h3>
+                    <p class="text-gray-400 text-sm mb-6">Inventory and order management system for RVM Fruits, streamlining stock tracking and operations.</p>
+                    <div class="flex gap-2">
+                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Management</span>
+                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Database</span>
+                    </div>
+                </div>
+                <div class="glass-card p-8 rounded-3xl group">
+                    <p class="text-sky-500 font-mono text-sm mb-2">Dec 2024</p>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-sky-400 transition-colors">Performance Booster</h3>
+                    <p class="text-gray-400 text-sm mb-6">Java-based automation tool for disk space optimization by identifying redundant system files.</p>
+                    <div class="flex gap-2">
+                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Java Core</span>
+                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Utility</span>
+                    </div>
+                </div>
+                <div class="glass-card p-8 rounded-3xl group">
+                    <p class="text-sky-500 font-mono text-sm mb-2">May 2024</p>
+                    <h3 class="text-xl font-bold mb-4 group-hover:text-sky-400 transition-colors">Space Invaders</h3>
+                    <p class="text-gray-400 text-sm mb-6">Python-based arcade game exhibited at MEPEXPO'24. Features custom physics and sprite management.</p>
+                    <div class="flex gap-2">
+                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Python</span>
+                        <span class="text-[10px] px-2 py-1 border border-white/20 rounded">Pygame</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-    <div class="section-label">Where I've worked</div>
-    <h2 class="section-title">Professional <em>Experience</em></h2>
-    <div class="exp-card reveal">
-        <div class="exp-header">
+        <section class="grid md:grid-cols-2 gap-12" data-aos="fade-up">
             <div>
-                <h3 class="exp-title">Infosys Springboard Virtual Internship 6.0</h3>
-                <p class="exp-role">Full Stack Developer Intern</p>
+                <h2 class="text-3xl font-bold mb-8">Education</h2>
+                <div class="space-y-6">
+                    <div class="border-l-2 border-white/10 pl-6">
+                        <p class="text-sky-400 font-bold">2023 - 2027</p>
+                        <h4 class="text-lg font-bold">Mepco Schlenk Engineering College</h4>
+                        <p class="text-gray-400">B.Tech Information Technology</p>
+                        <p class="text-white mt-1 font-mono">CGPA: 7.84</p>
+                    </div>
+                </div>
             </div>
-            <div class="exp-badge">Feb – Apr 2026</div>
-        </div>
-        <p class="exp-desc">
-            Developed <strong>QuickServe</strong>, a localized services web application using <strong>React.js</strong> for the frontend and <strong>Java with Maven</strong> for backend services. Gained hands-on experience in debugging, version control using Git, and clean coding in an Agile environment.
-        </p>
-    </div>
-</section>
-
-<div class="sep"></div>
-
-<!-- PROJECTS -->
-<section id="projects">
-    <div class="section-label">Things I've built</div>
-    <h2 class="section-title">University <em>Projects</em></h2>
-    <div class="projects-grid">
-        <div class="project-card reveal">
-            <p class="project-date">Dec 2025</p>
-            <h3 class="project-title">Malware Propagation Prediction</h3>
-            <p class="project-desc">Developed a predictive framework for modeling malware propagation in double-layer computer networks, enabling accurate forecasting and optimized defense strategies.</p>
-            <span class="project-tag">Cybersecurity · ML</span>
-        </div>
-        <div class="project-card reveal" style="transition-delay: 0.1s;">
-            <p class="project-date">May 2025</p>
-            <h3 class="project-title">Store Smart Manager</h3>
-            <p class="project-desc">Management system for RVM Fruits and Vegetables shop to monitor orders, maintain stock records, and improve operational efficiency end-to-end.</p>
-            <span class="project-tag">Full Stack · Business</span>
-        </div>
-        <div class="project-card reveal" style="transition-delay: 0.2s;">
-            <p class="project-date">Dec 2024</p>
-            <h3 class="project-title">Performance Booster</h3>
-            <p class="project-desc">Java application automating the identification and removal of unused files to help users manage disk space effectively and improve system performance.</p>
-            <span class="project-tag">Java · System Utilities</span>
-        </div>
-        <div class="project-card reveal" style="transition-delay: 0.3s;">
-            <p class="project-date">May 2024</p>
-            <h3 class="project-title">Space Invaders</h3>
-            <p class="project-desc">Developed a Python-based fighting game and exhibited at MEPEXPO'24, showcasing interactive game design and creative development skills.</p>
-            <span class="project-tag">Python · Game Dev</span>
-        </div>
-    </div>
-</section>
-
-<div class="sep"></div>
-
-<!-- CERTIFICATIONS -->
-<div class="certs-section section-full" id="certs">
-    <div class="section-inner">
-        <div class="section-label">Credentials</div>
-        <h2 class="section-title">Professional <em>Certifications</em></h2>
-        <div class="certs-grid">
-            <div class="cert-item reveal">
-                <div class="cert-icon">🛡️</div>
-                <div class="cert-name">Practical Cyber Security<span>NPTEL</span></div>
+            <div>
+                <h2 class="text-3xl font-bold mb-8">Certifications</h2>
+                <div class="flex flex-wrap gap-3">
+                    <span class="glass-card px-4 py-2 rounded-lg text-sm">Practical Cyber Security (NPTEL)</span>
+                    <span class="glass-card px-4 py-2 rounded-lg text-sm">Internet of Things (NPTEL)</span>
+                    <span class="glass-card px-4 py-2 rounded-lg text-sm">IT Foundation - Java (Infosys)</span>
+                    <span class="glass-card px-4 py-2 rounded-lg text-sm">R Software (NPTEL)</span>
+                </div>
             </div>
-            <div class="cert-item reveal">
-                <div class="cert-icon">🌐</div>
-                <div class="cert-name">Introduction to Internet of Things<span>NPTEL</span></div>
-            </div>
-            <div class="cert-item reveal">
-                <div class="cert-icon">📊</div>
-                <div class="cert-name">Introduction to R Software<span>NPTEL</span></div>
-            </div>
-            <div class="cert-item reveal">
-                <div class="cert-icon">☕</div>
-                <div class="cert-name">IT Foundation Skills — Java<span>Infosys</span></div>
-            </div>
-            <div class="cert-item reveal">
-                <div class="cert-icon">💻</div>
-                <div class="cert-name">Diploma in Computer Application<span>DCA</span></div>
-            </div>
-            <div class="cert-item reveal">
-                <div class="cert-icon">📝</div>
-                <div class="cert-name">Diploma in MS-Office<span>DMO</span></div>
-            </div>
-        </div>
-    </div>
-</div>
+        </section>
 
-<div class="sep"></div>
+    </main>
 
-<!-- EDUCATION -->
-<section id="education">
-    <div class="section-label">Academic Background</div>
-    <h2 class="section-title">My <em>Education</em></h2>
-    <div class="edu-timeline">
-        <div class="edu-item reveal">
-            <div class="edu-year">2023 – 2027</div>
-            <h3 class="edu-school">Mepco Schlenk Engineering College, Sivakasi</h3>
-            <p class="edu-degree">B.Tech — Information Technology</p>
-            <span class="edu-score">CGPA: 7.84 / 10 (up to 5th sem)</span>
-        </div>
-        <div class="edu-item reveal">
-            <div class="edu-year">2022 – 2023</div>
-            <h3 class="edu-school">Ayira Vaisya Higher Secondary School, Paramakudi</h3>
-            <p class="edu-degree">HSC — Class XII</p>
-            <span class="edu-score">Score: 87.17%</span>
-        </div>
-    </div>
-</section>
+    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-sm">
+        <p>© 2026 Gokul Saravanakkumar R. Built with precision.</p>
+    </footer>
 
-</main>
-
-<!-- FOOTER -->
-<footer>
-    <div class="footer-logo">Gokul SR.</div>
-    <p class="footer-copy">© 2026 Gokul Saravanakkumar R. All Rights Reserved.</p>
-</footer>
-
-<script>
-    // CURSOR
-    const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursor-ring');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-
-    document.addEventListener('mousemove', e => {
-        mx = e.clientX; my = e.clientY;
-        cursor.style.left = mx - 6 + 'px';
-        cursor.style.top = my - 6 + 'px';
-    });
-
-    function animRing() {
-        rx += (mx - rx - 20) * 0.12;
-        ry += (my - ry - 20) * 0.12;
-        ring.style.left = rx + 'px';
-        ring.style.top = ry + 'px';
-        requestAnimationFrame(animRing);
-    }
-    animRing();
-
-    document.querySelectorAll('a, button, .skill-pill, .project-card, .cert-item').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            ring.style.width = '60px'; ring.style.height = '60px';
-            ring.style.borderColor = 'rgba(0,255,163,0.6)';
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-quad'
         });
-        el.addEventListener('mouseleave', () => {
-            ring.style.width = '40px'; ring.style.height = '40px';
-            ring.style.borderColor = 'rgba(0,194,255,0.5)';
-        });
-    });
-
-    // CANVAS BG — Particles
-    const canvas = document.getElementById('bg-canvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, particles = [];
-
-    function resize() {
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    class Particle {
-        constructor() { this.reset(); }
-        reset() {
-            this.x = Math.random() * W;
-            this.y = Math.random() * H;
-            this.size = Math.random() * 1.5 + 0.3;
-            this.vx = (Math.random() - 0.5) * 0.3;
-            this.vy = (Math.random() - 0.5) * 0.3;
-            this.alpha = Math.random() * 0.5 + 0.1;
-            this.color = Math.random() > 0.5 ? '0,194,255' : '0,255,163';
-        }
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
-        }
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${this.color},${this.alpha})`;
-            ctx.fill();
-        }
-    }
-
-    for (let i = 0; i < 120; i++) particles.push(new Particle());
-
-    // Draw connections
-    function drawConnections() {
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const d = Math.sqrt(dx*dx + dy*dy);
-                if (d < 100) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(0,194,255,${0.06 * (1 - d/100)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-
-    function loop() {
-        ctx.clearRect(0, 0, W, H);
-        drawConnections();
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(loop);
-    }
-    loop();
-
-    // SCROLL REVEAL
-    const revealEls = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('visible');
-                observer.unobserve(e.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    revealEls.forEach(el => observer.observe(el));
-
-    // COUNTER ANIMATION
-    function animateCounters() {
-        document.querySelectorAll('.val').forEach(el => {
-            const target = parseFloat(el.textContent);
-            if (isNaN(target)) return;
-            const isDecimal = el.textContent.includes('.');
-            let current = 0;
-            const step = target / 40;
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                el.textContent = isDecimal ? current.toFixed(2) : Math.floor(current) + (el.textContent.includes('+') ? '+' : '');
-            }, 30);
-        });
-    }
-
-    setTimeout(animateCounters, 1200);
-
-    // TYPING EFFECT for hero subtitle
-    const roles = ['Software Developer', 'Full Stack Enthusiast', 'Cybersecurity Learner', 'IoT Explorer'];
-    let ri = 0, ci = 0, del = false;
-    const roleEl = document.querySelector('.hero-role');
-    const baseText = '&nbsp;·&nbsp; IT Student &nbsp;·&nbsp; ';
-
-    function typeRole() {
-        const current = roles[ri];
-        if (!del) {
-            if (ci <= current.length) {
-                roleEl.innerHTML = baseText + current.slice(0, ci);
-                ci++;
-                setTimeout(typeRole, 80);
-            } else {
-                del = true;
-                setTimeout(typeRole, 1800);
-            }
-        } else {
-            if (ci > 0) {
-                roleEl.innerHTML = baseText + current.slice(0, ci);
-                ci--;
-                setTimeout(typeRole, 40);
-            } else {
-                del = false;
-                ri = (ri + 1) % roles.length;
-                setTimeout(typeRole, 300);
-            }
-        }
-    }
-
-    setTimeout(typeRole, 1500);
-</script>
+    </script>
 </body>
 </html>
