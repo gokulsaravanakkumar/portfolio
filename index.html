@@ -264,6 +264,17 @@
             align-items: center;
             gap: 10px;
         }
+        .floating-contact-card /* replace with your actual class name */ {
+  position: fixed;
+  right: 20px;          /* not a negative value */
+  max-width: 280px;     /* cap the width */
+  width: calc(100vw - 40px); /* never exceed viewport minus margin */
+}
+
+/* Prevent any element from causing horizontal scroll */
+html, body {
+  overflow-x: hidden;
+}
 
         .hero-card .icon {
             width: 28px; height: 28px;
