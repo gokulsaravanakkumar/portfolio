@@ -823,7 +823,7 @@
                         <span class="lbl">CGPA</span>
                     </div>
                     <div class="stat-box">
-                        <span class="val">4+</span>
+                        <span class="val">5+</span>
                         <span class="lbl">Projects</span>
                     </div>
                     <div class="stat-box">
@@ -901,24 +901,30 @@
     <h2 class="section-title">University <em>Projects</em></h2>
     <div class="projects-grid">
         <div class="project-card reveal">
+            <p class="project-date">May 2026</p>
+            <h3 class="project-title">Automated Illicit Mining Surveillance (CTMNet)</h3>
+            <p class="project-desc">Designed a multitask CNN-Transformer network for satellite imagery change-detection. Features real-time environmental alignment, law enforcement dispatch protocols, and automated forensic PDF reporting.</p>
+            <span class="project-tag">Deep Learning · PyTorch · FastAPI</span>
+        </div>
+        <div class="project-card reveal" style="transition-delay: 0.1s;">
             <p class="project-date">Dec 2025</p>
             <h3 class="project-title">Malware Propagation Prediction</h3>
             <p class="project-desc">Developed a predictive framework for modeling malware propagation in double-layer computer networks, enabling accurate forecasting and optimized defense strategies.</p>
             <span class="project-tag">Cybersecurity · ML</span>
         </div>
-        <div class="project-card reveal" style="transition-delay: 0.1s;">
+        <div class="project-card reveal" style="transition-delay: 0.2s;">
             <p class="project-date">May 2025</p>
             <h3 class="project-title">Store Smart Manager</h3>
             <p class="project-desc">Management system for RVM Fruits and Vegetables shop to monitor orders, maintain stock records, and improve operational efficiency end-to-end.</p>
             <span class="project-tag">Full Stack · Business</span>
         </div>
-        <div class="project-card reveal" style="transition-delay: 0.2s;">
+        <div class="project-card reveal" style="transition-delay: 0.3s;">
             <p class="project-date">Dec 2024</p>
             <h3 class="project-title">Performance Booster</h3>
             <p class="project-desc">Java application automating the identification and removal of unused files to help users manage disk space effectively and improve system performance.</p>
             <span class="project-tag">Java · System Utilities</span>
         </div>
-        <div class="project-card reveal" style="transition-delay: 0.3s;">
+        <div class="project-card reveal" style="transition-delay: 0.4s;">
             <p class="project-date">May 2024</p>
             <h3 class="project-title">Space Invaders</h3>
             <p class="project-desc">Developed a Python-based fighting game and exhibited at MEPEXPO'24, showcasing interactive game design and creative development skills.</p>
@@ -1014,147 +1020,16 @@
     }
     animRing();
 
-    document.querySelectorAll('a, button, .skill-pill, .project-card, .cert-item').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            ring.style.width = '60px'; ring.style.height = '60px';
-            ring.style.borderColor = 'rgba(0,255,163,0.6)';
-        });
-        el.addEventListener('mouseleave', () => {
-            ring.style.width = '40px'; ring.style.height = '40px';
-            ring.style.borderColor = 'rgba(0,194,255,0.5)';
-        });
-    });
-
-    // CANVAS BG — Particles
-    const canvas = document.getElementById('bg-canvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, particles = [];
-
-    function resize() {
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    class Particle {
-        constructor() { this.reset(); }
-        reset() {
-            this.x = Math.random() * W;
-            this.y = Math.random() * H;
-            this.size = Math.random() * 1.5 + 0.3;
-            this.vx = (Math.random() - 0.5) * 0.3;
-            this.vy = (Math.random() - 0.5) * 0.3;
-            this.alpha = Math.random() * 0.5 + 0.1;
-            this.color = Math.random() > 0.5 ? '0,194,255' : '0,255,163';
-        }
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
-        }
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${this.color},${this.alpha})`;
-            ctx.fill();
-        }
-    }
-
-    for (let i = 0; i < 120; i++) particles.push(new Particle());
-
-    // Draw connections
-    function drawConnections() {
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const d = Math.sqrt(dx*dx + dy*dy);
-                if (d < 100) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(0,194,255,${0.06 * (1 - d/100)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-
-    function loop() {
-        ctx.clearRect(0, 0, W, H);
-        drawConnections();
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(loop);
-    }
-    loop();
-
     // SCROLL REVEAL
-    const revealEls = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('visible');
-                observer.unobserve(e.target);
-            }
+    const reveals = document.querySelectorAll('.reveal');
+    const checkReveal = () => {
+        reveals.forEach(r => {
+            const top = r.getBoundingClientRect().top;
+            if(top < window.innerHeight - 50) r.classList.add('visible');
         });
-    }, { threshold: 0.1 });
-
-    revealEls.forEach(el => observer.observe(el));
-
-    // COUNTER ANIMATION
-    function animateCounters() {
-        document.querySelectorAll('.val').forEach(el => {
-            const target = parseFloat(el.textContent);
-            if (isNaN(target)) return;
-            const isDecimal = el.textContent.includes('.');
-            let current = 0;
-            const step = target / 40;
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                el.textContent = isDecimal ? current.toFixed(2) : Math.floor(current) + (el.textContent.includes('+') ? '+' : '');
-            }, 30);
-        });
-    }
-
-    setTimeout(animateCounters, 1200);
-
-    // TYPING EFFECT for hero subtitle
-    const roles = ['Software Developer', 'Full Stack Enthusiast', 'Cybersecurity Learner', 'IoT Explorer'];
-    let ri = 0, ci = 0, del = false;
-    const roleEl = document.querySelector('.hero-role');
-    const baseText = '&nbsp;·&nbsp; IT Student &nbsp;·&nbsp; ';
-
-    function typeRole() {
-        const current = roles[ri];
-        if (!del) {
-            if (ci <= current.length) {
-                roleEl.innerHTML = baseText + current.slice(0, ci);
-                ci++;
-                setTimeout(typeRole, 80);
-            } else {
-                del = true;
-                setTimeout(typeRole, 1800);
-            }
-        } else {
-            if (ci > 0) {
-                roleEl.innerHTML = baseText + current.slice(0, ci);
-                ci--;
-                setTimeout(typeRole, 40);
-            } else {
-                del = false;
-                ri = (ri + 1) % roles.length;
-                setTimeout(typeRole, 300);
-            }
-        }
-    }
-
-    setTimeout(typeRole, 1500);
+    };
+    window.addEventListener('scroll', checkReveal);
+    window.addEventListener('load', checkReveal);
 </script>
 </body>
 </html>
